@@ -14,19 +14,19 @@ An open-source, AI-native CRM foundation module for sending bulk, personalized e
 
 ```mermaid
 graph TD
-    A[User (React Frontend)] -->|1. Setup Campaign & CSV| B(Node.js Backend)
-    A -->|2. Authenticate| C[Google Cloud OAuth]
+    A["User (React Frontend)"] -->|1. Setup Campaign & CSV| B["Node.js Backend"]
+    A -->|2. Authenticate| C["Google Cloud OAuth"]
     C -->|Tokens| B
-    B -->|3. Save Campaign Data| D[(SQLite Database)]
+    B -->|3. Save Campaign Data| D[("SQLite Database")]
     
-    E[Orchestrator Worker] -->|4. Fetch Queued Emails| D
-    E -->|5. Send with Pacing| F[Gmail API]
-    F -->|Delivered| G[Recipient Inbox]
+    E["Orchestrator Worker"] -->|4. Fetch Queued Emails| D
+    E -->|5. Send with Pacing| F["Gmail API"]
+    F -->|Delivered| G["Recipient Inbox"]
     
-    G -->|6. Open Email| H[Tracking Pixel Endpoint]
+    G -->|6. Open Email| H["Tracking Pixel Endpoint"]
     H -->|Update Status: Opened| D
     
-    I[Reply Detector Worker] -->|7. Poll Sent Threads| F
+    I["Reply Detector Worker"] -->|7. Poll Sent Threads| F
     I -->|Check for New Replies| D
     I -->|Update Status: Replied| D
 ```
