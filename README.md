@@ -10,6 +10,27 @@ An open-source, AI-native CRM foundation module for sending bulk, personalized e
 - **Smart Pacing:** Configurable delays between each email to respect Gmail's sending limits and appear human.
 - **Sleek Dashboard:** A premium, dark-mode focused UI with full transparency into every recipient's status.
 
+## Architecture & User Flow
+
+```mermaid
+graph TD
+    A[User (React Frontend)] -->|1. Setup Campaign & CSV| B(Node.js Backend)
+    A -->|2. Authenticate| C[Google Cloud OAuth]
+    C -->|Tokens| B
+    B -->|3. Save Campaign Data| D[(SQLite Database)]
+    
+    E[Orchestrator Worker] -->|4. Fetch Queued Emails| D
+    E -->|5. Send with Pacing| F[Gmail API]
+    F -->|Delivered| G[Recipient Inbox]
+    
+    G -->|6. Open Email| H[Tracking Pixel Endpoint]
+    H -->|Update Status: Opened| D
+    
+    I[Reply Detector Worker] -->|7. Poll Sent Threads| F
+    I -->|Check for New Replies| D
+    I -->|Update Status: Replied| D
+```
+
 ## Quick Start
 
 ### 1. Installation
