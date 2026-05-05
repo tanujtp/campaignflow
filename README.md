@@ -1,4 +1,4 @@
-# Campaignflow CRM - Email Sender Module
+# Campaign flow CRM - Email Sender Module
 
 An open-source, AI-native CRM foundation module for sending bulk, personalized emails directly through your own Gmail account. Built with a Node.js backend (SQLite) and a premium React/Vite frontend.
 
